@@ -1,0 +1,25 @@
+from django.shortcuts import render, redirect
+from django.views.generic import View
+from .models import Produucto 
+
+class Home(View):
+	def get(self,request):
+		return render(request,'main/home.html')
+
+
+
+
+
+# esta clase espara ver el perfil
+class Perfil(View):
+	def get(self,request):
+		return render(request,'main/perfil.html')
+
+	def post(self,request):
+		new_p=Produucto()
+		new_p.nombre= request.POST.get('nombre')
+		new_p.desc=request.POST.get('desc')
+		new_p.precio=request.POST.get('precio')
+		new_p.usuario=request.user
+		new_p.save()
+		return redirect('perfil')	

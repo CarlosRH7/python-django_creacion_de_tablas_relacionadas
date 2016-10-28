@@ -1,0 +1,23 @@
+<h1>Perfil</h1>
+
+<!-- estos son los datos del usuario -->
+{%if request.user.is_authenticated%}
+Hola {{request.User.perfil.alias}}
+<br>
+ya estas grandecito cabron {{request.user.perfil.edad}}
+<br>
+te voy a llamar al {{request.user.perfil.tel}}
+<br>
+porque eres {{request.user.perfil.genero}} y {{request.user.perfil.ocupacion}}
+
+<form method="post" action=".">
+		{%csrf_token%}
+	<input type="text" name="nombre" placeholder="nombre de producto">
+	<input type="text" name="desc" placeholder="descripcion de producto">	
+	<input type="text" name="precio" placeholder="precio de producto">	
+	
+	<input type="submit" >
+
+</form>
+
+{%endif%}
