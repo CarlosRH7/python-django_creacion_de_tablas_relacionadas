@@ -27,14 +27,35 @@ class Produucto(models.Model):
 	def __str__(self):
 		return self.nombre
 
-# class Produucto(models.Model):
-# 	new_p=Produucto()
-# 	new_p.nombre= request.POST.get('nombre')
-# 	new_p.desc=request.POST.get('desc')
-# 	new_p.precio=request.POST.get('precio')
-# 	new_p.usuario=request.user
-# 	new_p.save()
 
 
-# 	def __str__(self):
-# 		return self.nombre		
+# clase para agrgar a la base cines y peliculas
+class Cine(models.Model):
+	nombre=models.CharField(max_length=20)
+	lugar=models.TextField()
+
+	def __str__(self):
+		return self.nombre
+
+
+class Pelicula(models.Model):
+	GENEROS=(
+		('terror', 'Terror'),
+		('SciFi','Ciencia Ficción')
+	)
+	director=models.CharField(max_length=140)
+	genero=models.CharField(max_length=50,choices=GENEROS)
+	titulo= models.CharField(max_length=20)
+	sinopsis=models.TextField()
+	cines = models.ForeignKey(Cine,related_name='peliculas')
+
+	def __str__(self):
+		return self.titulo
+
+
+
+
+
+
+
+

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
-from .models import Produucto 
+from .models import Produucto,Cine 
 
 class Home(View):
 	def get(self,request):
@@ -23,3 +23,26 @@ class Perfil(View):
 		new_p.usuario=request.user
 		new_p.save()
 		return redirect('perfil')	
+
+
+# esta clase es para ver mandar el objeto cine a la plantilla cines.html
+class Cines(View):
+	def get(self,request):
+		context={
+		'cines':Cine.objects.all()
+		}
+		return render(request,'main/cines.html',context)
+
+	def post(self,request):
+		id=request.POST.get('cine')
+		cine=Cine.objects.get(id=id)
+		pelis=cine.peliculas.all()
+		context={
+		'cines':Cine.objects.all(),
+		'pelis':pelis,
+		'cine':cine
+		}
+		return render(request,'main/cines.html',context)
+
+			
+		
